@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<!--shopping cart page with styling + script included-->
+<!--Munesu Maminimini, @Moriarty221B-->
+
+<head>
+    <title>HICKIES Originals</title>
+    <script>
+        var amount = 0;
+
+        /*returns corresponding selected colour*/
+        function colorSelect(color) {
+            document.getElementById("color").innerHTML = color;
+            document.getElementById("color2").innerHTML = color;
+        }
+
+        /*increments the cart items when + button is pressed*/
+        function increment() {
+            amount++;
+            document.getElementById("amount").innerHTML = amount;
+        }
+
+        /*decrements the cart items when - button is pressed*/
+        function decrement() {
+            amount = amount < 1 ? 0 : --amount;
+            document.getElementById("amount").innerHTML = amount;
+        }
+
+        /*closes popup modal and resets amount to zero when cancel button is pressed*/
+        function cancel() {
+            amount = 0;
+            document.getElementById("amount").innerHTML = amount;
+            modal.style.display = "none";
+        }
+        /*closes popup modal, proceeds to checkout and shows details of selected items */
+        function agree() {
+            document.getElementById("amountBtn").innerHTML = amount;
+            document.getElementById("myBtn").innerHTML = "Check out Now";
+            /*-----------------------------------------------------------------------*/
+            /*--Add details--*/
+            var i = 0;
+            for (i = 0; i < amount; i++) {
+                /*Create element creates whatever is in <>*/
+                var newBtn = document.createElement("Button");
+                /*Add a class defined in css*/
+                newBtn.classList.add("color-button");
+                /*Generate the button colour class. class names are '-' delimited (no spaces) and are in all small letters, which shouldn't matter since javascript but don't care to experiment further*/
+                var btnColor = "button-" + document.getElementById("color").innerHTML;
+                btnColor = btnColor.toLowerCase().replace(" ", "-");
+                newBtn.classList.add(btnColor);
+                /*Add the newly created element to our detail division.*/
+                document.getElementById("detail_no").appendChild(newBtn);
+            }
+            /*-----------------------------------------------------------------------*/
+            amount = 0;
+            modal.style.display = "none";
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id="content">
+        <div>
+            <h1>HICKIES Originals</h1>
+        </div>
+
+        <!--5 star review-->
+        <div>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <style>
+                .checked {
+                    color: black;
+                }
+            </style>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span style="color:rgb(208, 208, 208);display: inline-block; width: 25%;margin: 5px; text-align:center;">1,239 reviews</span>
+
+            <h2 style="color: rgb(160, 78, 91); ">$14.99<span style="color:rgb(208, 208, 208);display: inline-block; width: 40%;margin: 5px; text-align:center; font-size: 16px;">$17.99 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 25% OFF </span> </h2>
+            <!--needs to be greyed out and on same line as above-->
+
+
+            <p>ONLINE EXCLUSIVE</p>
+        </div>
+
+        <div>
+            <span><strong>COLOR : </strong></span>
+            <span id="color">choose a colour</span>
+            <!--the color selection block-->
+            <div id="select_color">
+                <button class="inline-block color-button button-red" onclick="colorSelect('Red');"></button>
+                <button class="inline-block color-button button-violet" onclick="colorSelect('Violet');"></button>
+                <button class="inline-block color-button button-black" onclick="colorSelect('Black');"></button>
+                <button class="inline-block color-button button-white" onclick="colorSelect('White');"></button>
+                <button class="inline-block color-button button-orange" onclick="colorSelect('Orange');"></button>
+                <button class="inline-block color-button button-yellow" onclick="colorSelect('Yellow');"></button>
+                <button class="inline-block color-button button-navy-blue" onclick="colorSelect('Navy Blue');"></button>
+                <button class="inline-block color-button button-tourquise" onclick="colorSelect('Tourquise');"></button>
+                <button class="inline-block color-button button-beige" onclick="colorSelect('Beige');"></button>
+                <button class="inline-block color-button button-sky-blue" onclick="colorSelect('Sky Blue');"></button>
+                <button class="inline-block color-button button-lime-green" onclick="colorSelect('Lime Green');"></button>
+                <br>
+                <button class="inline-block color-button button-pink" onclick="colorSelect('Pink');"></button>
+                <button class="inline-block color-button button-cream" onclick="colorSelect('Cream');"></button>
+                <button class="inline-block color-button button-emerald-green" onclick="colorSelect('Emerald Green');"></button>
+                <button class="inline-block color-button button-dark-grey" onclick="colorSelect('Dark Grey');"></button>
+                <button class="inline-block color-button button-brown" onclick="colorSelect('Brown');"></button>
+                <button class="inline-block color-button button-aqua-marine" onclick="colorSelect('Aqua Marine');"></button>
+                <button class="inline-block color-button button-light-grey" onclick="colorSelect('Light Grey');"></button>
+
+            </div>
+
+
+        </div>
+
+        <div>
+            <!--size/fit + cart modal block-->
+
+            <p><strong>Size Guide</strong> </p>
+
+            <p><strong>Your custom fit</strong></p>
+
+            <!--for the popup cart selection item-->
+            <style>
+                #content {
+                    margin: auto;
+                    padding: 10px;
+                    max-width: 550px;
+                }
+                
+                body {
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+                /* The Modal (background) */
+                
+                .modal {
+                    display: none;
+                    /* Hidden by default */
+                    position: fixed;
+                    /* Stay in place */
+                    z-index: 1;
+                    /* Sit on top */
+                    padding-top: 100px;
+                    /* Location of the box */
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    /* Full width */
+                    height: 100%;
+                    /* Full height */
+                    overflow: auto;
+                    /* Enable scroll if needed */
+                    background-color: rgb(0, 0, 0);
+                    /* Fallback color */
+                    background-color: rgba(0, 0, 0, 0.4);
+                    /* Black w/ opacity */
+                }
+                /* Modal Content */
+                
+                .modal-content {
+                    background-color: #fefefe;
+                    margin: auto;
+                    padding: 10px;
+                    border: 1px solid black;
+                    max-width: 550px;
+                }
+                /* The Close Button */
+                
+                .close {
+                    color: #aaaaaa;
+                    float: right;
+                    font-size: 28px;
+                    font-weight: bold;
+                }
+                
+                .close:hover,
+                .close:focus {
+                    color: #000;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+                
+                .myBtn {
+                    background-color: black;
+                    color: white;
+                    border: none;
+                    border-radius: 50px/36px;
+                    font-size: 16px;
+                    width: 200px;
+                    height: 50px;
+                    text-align: center;
+                    padding: 10px;
+                    margin: 10px;
+                }
+                
+                .minus-button {
+                    text-align: center;
+                    border: none;
+                    border-radius: 50px;
+                    font-size: 40px;
+                    background-color: black;
+                    color: white;
+                    width: 50px;
+                }
+                
+                .plus-button {
+                    text-align: center;
+                    border: none;
+                    border-radius: 50px;
+                    font-size: 40px;
+                    background-color: black;
+                    color: white;
+                    width: 50px;
+                }
+                
+                .agree-button {
+                    text-align: center;
+                    border: 1px solid green;
+                    border-radius: 100px;
+                    font-size: 10px;
+                    background-color: rgba(75, 151, 75, 0.5);
+                    color: black;
+                    width: 60px;
+                    height: 30px;
+                }
+                
+                .cancel-button {
+                    text-align: center;
+                    border: 1px solid red;
+                    border-radius: 100px;
+                    font-size: 10px;
+                    background-color: rgba(182, 88, 88, 0.5);
+                    color: black;
+                    width: 60px;
+                    height: 30px;
+                }
+                /*color_button_selection*/
+                
+                .color-button {
+                    border: none;
+                    padding: 14px;
+                    border-radius: 50%;
+                    margin: 8px;
+                    font-size: 16px;
+                }
+                
+                .select_color {
+                    border-radius: 30px;
+                    width: 30px;
+                    height: 30px;
+                }
+                
+                .color-button:focus {
+                    outline: none;
+                    box-shadow: 0 0 0 2px rgb(255, 255, 255), 0 0 0 4px #4d535c;
+                }
+                
+                .button-violet {
+                    background-color: #6327F4;
+                }
+                
+                .button-red {
+                    background-color: #C62930;
+                }
+                
+                .button-black {
+                    background-color: black;
+                }
+                
+                .button-white {
+                    background-color: white;
+                }
+                
+                .button-orange {
+                    background-color: orange;
+                }
+                
+                .button-yellow {
+                    background-color: yellow;
+                }
+                
+                .button-navy-blue {
+                    background-color: #1D53AE;
+                }
+                
+                .button-tourquise {
+                    background-color: #285A7B;
+                }
+                
+                .button-beige {
+                    background-color: #DAB595;
+                }
+                
+                .button-sky-blue {
+                    background-color: #54C0F9;
+                }
+                
+                .button-lime-green {
+                    background-color: #90FA4D;
+                }
+                
+                .button-pink {
+                    background-color: #EA37B3;
+                }
+                
+                .button-cream {
+                    background-color: #DAB595;
+                }
+                
+                .button-emerald-green {
+                    background-color: #418D65;
+                }
+                
+                .button-dark-grey {
+                    background-color: #6F6975;
+                }
+                
+                .button-brown {
+                    background-color: #6E502B;
+                }
+                
+                .button-aqua-marine {
+                    background-color: #69DAD1;
+                }
+                
+                .button-light-grey {
+                    background-color: #C4C4C4;
+                }
+                
+                .amount {
+                    background-color: white;
+                    border: black;
+                    box-shadow: 0 0 0 1px black;
+                    border-radius: 50px/36px;
+                    font-size: 16px;
+                    width: 70px;
+                    height: 50px;
+                    text-align: center;
+                    padding: 10px;
+                    margin: 10px;
+                }
+            </style>
+
+            <!-- Trigger/Open The Modal -->
+            <button id="amountBtn" class="amount"><strong>0</strong></button>
+            <button id="myBtn" class="myBtn" data-toggle="modal"><strong>Add to Cart</strong></button>
+
+
+            <!-- The Modal -->
+            <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+
+                    <span class="close">&times;</span>
+
+                    <h5>Please add the quantity of the item you have selected</h5>
+                    <div float="center">
+                        <span id="color2" style=" margin: 60px;"></span>
+                        <button id="minus-button" class="minus-button" data-toggle="modal" onclick="decrement()"><strong>-</strong></button>
+                        <span id="amount" style="font-size: 30px; margin: 15px;">0</span>
+                        <span><button id="plus-button" class="plus-button" data-toggle="modal" onclick="increment()"><strong>+</strong></button></span>
+                        <br><br>
+                        <button id="agree-button" paddingleft="200%" class="agree-button" data-toggle="modal" onclick="agree()"><strong>Agree</strong></button>
+                        <button id="cancel-button" class="cancel-button" data-toggle="modal" onclick="cancel()"><strong>Cancel</strong></button>
+
+                    </div>
+                </div>
+
+            </div>
+            <!--modal script-->
+            <script>
+                // Get the modal
+                var modal = document.getElementById("myModal");
+
+                // Get the button that opens the modal
+                var btn = document.getElementById("myBtn");
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks the button, open the modal 
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            </script>
+
+        </div>
+
+        <hr>
+        <br>
+        <div>
+            <p><strong>DETAILS</strong></p>
+            <div id="detail_no">
+
+
+            </div>
+        </div>
+        <br>
+        <hr>
+
+        <p><strong>Need Help?</strong> </p>
+        <!--help form anchor-->
+        <span><a href="help.html">click here</a></span>
+        <p><strong>Shipping & Returns</strong></p>
+    </div>
+
+</body>
+
+
+</html>

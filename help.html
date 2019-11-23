@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<!--form for customers to fill when they have issues-->
+<!--Basic template that allows user to interact with fields but not designed to store/make use of the input/data-->
+<!--Munesu Maminimini, @Moriarty221B-->
+
+<head>
+    <title>HELP</title>
+</head>
+
+<body>
+    <form>
+        <h1>HELP </h1>
+        <h5>for further assistance, please enter your details here to create an account and one of our consultants will get back to you</h5>
+
+        <!--create input fields to capture user data-->
+        <label for="username">enter your name:</label>
+        <input type="text" id="username" name="username" placeholder="username" required>
+        <br><br>
+        <label for="email">enter email:</label>
+        <input type="email" id="email" name="email" placeholder="your email" required>
+        <br><br>
+        <label for="password">password</label>
+        <input type="password" id="password" name="password" placeholder="choose a password" required>
+        <br><br>
+
+        <!--create select options for common issues-->
+        <p>Select your issue:</p>
+
+        <input type="radio" name="issue" value="can't find what i was looking for" id="option-1" required>
+        <label for="option-1">can't find what I am looking for</label>
+
+        <input type="radio" name="issue" value="item not loading to cart" id="option-2" required>
+        <label for="option-2">item not loading to cart</label>
+
+        <input type="radio" name="issue" value="other" id="option-3" required>
+        <label for="option-3">other</label>
+
+        <br><br>
+
+        <!--drop down item for preferred contact method-->
+        <label for="question">How should we contact you:</label>
+        <select name="question" id="question">
+            <option value="q1">Telephone</option>
+            <option value="q2">Email</option>
+            <option value="q3">Chatroom</option>
+        </select>
+        <br><br>
+        <!--text box for more information-->
+        <label for="answer">Enter preferred contact info here:</label>
+        <input type="text" name="answer" id="answer">
+        <br><br>
+
+        <label for="bio">Further describe your issue</label> <br>
+        <textarea name="bio" id="bio" cols="30" rows="10" placeholder="Tell us more about your issue..."></textarea>
+        <br><br>
+        <input type="submit" value="submit the form" name="" id="">
+    </form>
+</body>
+
+</html>
