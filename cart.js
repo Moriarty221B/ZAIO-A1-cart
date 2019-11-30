@@ -6,6 +6,7 @@ function colorSelect(color) {
     document.getElementById("color").innerHTML = color;
     document.getElementById("color2").innerHTML = color;
     document.getElementById("myBtn").innerHTML = "Add to Cart";
+
 }
 
 /*increments the cart items when + button is pressed*/
@@ -30,8 +31,9 @@ function cancel() {
 function agree() {
     document.getElementById("amountBtn").innerHTML = amount;
     document.getElementById("myBtn").innerHTML = "Check out Now";
-    /*-----------------------------------------------------------------------*/
-    /*--Add details--*/
+    document.querySelector("#myBtn").dataset.target = "#checkoutModal"
+        /*-----------------------------------------------------------------------*/
+        /*--Add details--*/
     var i = 0;
     for (i = 0; i < amount; i++) {
         /*Create element creates whatever is in <>*/
@@ -42,11 +44,27 @@ function agree() {
         var btnColor = "button-" + document.getElementById("color").innerHTML;
         btnColor = btnColor.toLowerCase().replace(" ", "-");
         newBtn.classList.add(btnColor);
-        /*Add the newly created element to our detail division.*/
+        /*Add the newly created element to detail division.*/
         document.getElementById("detail_no").appendChild(newBtn);
+
     }
     /*-----------------------------------------------------------------------*/
     amount = 0;
     modal.style.display = "none";
+
+    /*add corresponding price and color */
+
+
+}
+
+/*Update and display summary of cart items at checkout */
+function checkout() {
+
+    /*Show corresponding colors in details and cart*/
+
+
+
+
+
 
 }
