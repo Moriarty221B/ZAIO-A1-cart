@@ -1,9 +1,11 @@
 var amount = 0;
 /*--Munesu Maminimini, @Moriarty221B-->*/
 /*returns corresponding selected colour*/
+/*Provide option to add multiple items to cart */
 function colorSelect(color) {
     document.getElementById("color").innerHTML = color;
     document.getElementById("color2").innerHTML = color;
+    document.getElementById("myBtn").innerHTML = "Add to Cart";
 }
 
 /*increments the cart items when + button is pressed*/
@@ -36,7 +38,7 @@ function agree() {
         var newBtn = document.createElement("Button");
         /*Add a class defined in css*/
         newBtn.classList.add("color-button");
-        /*Generate the button colour class. class names are '-' delimited (no spaces) and are in all small letters, which shouldn't matter since javascript but don't care to experiment further*/
+        /*Generate the button colour class. class names are '-' delimited (no spaces) and are in all small letters*/
         var btnColor = "button-" + document.getElementById("color").innerHTML;
         btnColor = btnColor.toLowerCase().replace(" ", "-");
         newBtn.classList.add(btnColor);
